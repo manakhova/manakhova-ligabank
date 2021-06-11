@@ -5,10 +5,13 @@
   <base href="/">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Liga-bank</title>
+  <link rel="preload" href="fonts/Roboto-Bold.woff2" as="font">
+  <link rel="preload" href="fonts/Roboto-Medium.woff2" as="font">
+  <link rel="preload" href="fonts/Roboto-Regular.woff2" as="font">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="page__body">
-  <div class="page__body-container">
     <header class="page__header page-header">
       <a href="index.html" class="page-header__logo">
         <svg class="page-footer__logo-img" width="150" height="27">
@@ -16,52 +19,51 @@
         </svg>
       </a>
       <nav class="page-header__navigation">
-        <ul class="navigation">
+        <ul class="navigation navigation--header">
           <li class="navigation__item">
-            <a href="#">Услуги</a>
+            <a class="navigation__link" href="#">Услуги</a>
           </li>
           <li class="navigation__item">
-            <a href="#">Рассчитать кредит</a>
-          </li>
-          <li class="navigation__item navigation__item--active">
-            <a href="#">Конвертер валют</a>
+            <a class="navigation__link" href="#">Рассчитать кредит</a>
           </li>
           <li class="navigation__item">
-            <a href="#">Контакты</a>
+            <a class="navigation__link navigation__link--active" href="#">Конвертер валют</a>
           </li>
           <li class="navigation__item">
-            <a href="#">Задать вопрос</a>
+            <a class="navigation__link" href="#">Контакты</a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__link" href="#">Задать вопрос</a>
           </li>
         </ul>
       </nav>
-      <div class="page-header__authorization">
-        <svg class="page-header__authorization-img" width="20" height="22">
-          <use xlink:href="#login"></use>
-        </svg>
-        <a href="#">Войти в Интернет-банк</a>
-      </div>
+      <a class="page-header__authorization authorization" href="#">
+        Войти в Интернет-банк
+      </a>
     </header>
     <main class="page__main">
       <section class="credit">
         <div class="credit__info">
           <h1 class="credit__title">Лига Банк</h1>
           <p class="credit__slogan">Кредиты на любой случай</p>
-          <button class="credit__button button">Рассчитать кредит</button>
+          <a href="#" class="credit__button button button--credit">Рассчитать кредит</a>
         </div>
       </section>
       <section class="converter">
         <h2 class="converter__title">Конвертер валют</h2>
-        <div class="converter__container"></div>
+        <div class="converter__container">
           <form class="converter__calc-form" method="post" action="#">
-            <div class="converter__have">
+            <div class="converter__calc-form-item converter__have">
               <h3 class="converter__have-title">У меня есть</h3>
-              <label>
-                <input class="converter__have-input" type="number" name="money-have" id="money-have">
-              </label>
-              <span class="converter__have-type">
-                RUB
-              </span>
-              <ul class="converter__have-options">
+              <div class="converter__wrapper">
+                <label>
+                  <input class="converter__input converter__have-input" type="number" name="money-have" id="money-have" value="1000">
+                </label>
+                <div class="converter__type converter__have-type">
+                  RUB
+                </div>
+              </div>
+              <ul class="converter__options converter__have-options visually-hidden">
                 <li class="converter__have-option converter__have-option--active">RUB</li>
                 <li class="converter__have-option">USD</li>
                 <li class="converter__have-option">EUR</li>
@@ -69,15 +71,17 @@
                 <li class="converter__have-option">CNY</li>
               </ul>
             </div>
-            <div class="converter__want">
+            <div class="converter__calc-form-item converter__want">
               <h3 class="converter__want-title">Хочу приобрести</h3>
-              <label>
-                <input class="converter__want-input" type="number" name="money-want" id="money-want">
-              </label>
-              <span class="converter__want-type">
-                USD
-              </span>
-              <ul class="converter__want-options">
+              <div class="converter__wrapper">
+                <label>
+                  <input class="converter__input converter__want-input" type="number" name="money-want" id="money-want" value="1000">
+                </label>
+                <div class="converter__type converter__want-type">
+                  USD
+                </div>
+              </div>
+              <ul class="converter__options converter__want-options visually-hidden">
                 <li class="converter__want-option">RUB</li>
                 <li class="converter__want-option converter__want-option--active">USD</li>
                 <li class="converter__want-option">EUR</li>
@@ -85,60 +89,102 @@
                 <li class="converter__want-option">CNY</li>
               </ul>
             </div>
-            <div class="converter__container">
+            <div class="converter__calc-form-item converter__container">
               <div class="converter__calendar">
                 <label>
                   <input class="converter__calendar-date" type="text" id="date" name="date" value="01.06.21">
                 </label>
               </div>
-              <button class="converter__calendar-button button" type="button">Сохранить результат</button>
+              <button class="converter__calendar-button button button--converter" type="button">Сохранить результат</button>
             </div>
           </form>
         </div>
       </section>
       <section class="history">
         <div class="history__container">
-          <h3 class="history__title">
+          <h3 class="history__title">История конвертаций</h3>
             <ul class="history__list">
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1003 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1030 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1003 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1030 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1003 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1030 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1030 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1030 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
               <li class="history__item">
-                <span class="history__date">01.06.21</span>
-                <span class="history__convertation">100RUB &rarr; 1,3USD</span>
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1000 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
+              </li>
+              <li class="history__item">
+                <span class="history__date">01.06.2021</span>
+                <span class="history__convertation">
+                  <span id="from">1000 RUB</span>
+                  <span id="to">13,1234 USD</span>
+                </span>
+                </span>
               </li>
             </ul>
             <button class="history__button button">Очистить историю</button>
-          </h3>
         </div>
       </section>
     </main>
@@ -149,43 +195,41 @@
             <use xlink:href="#logo"></use>
           </svg>
         </a>
-        <div class="page-footer__info">
-          <p class="page-footer__address">
-            150015, г. Москва, ул. Московская, д. 32 <br>
-            Генеральная лицензия Банка России №1050 <br>
-            &copy; Лига Банк, 2019
-          </p>
+        <div class="page-footer__address">
+          150015, г. Москва, ул. Московская, д. 32 <br>
+          Генеральная лицензия Банка России №1050 <br>
+          &copy; Лига Банк, 2019
         </div>
       </div>
       <div class="page-footer__navigation">
-        <ul class="navigation">
+        <ul class="navigation navigation--footer">
           <li class="navigation__item">
-            <a href="#">Услуги</a>
+            <a class="navigation__link" href="#">Услуги</a>
           </li>
           <li class="navigation__item">
-            <a href="#">Рассчитать кредит</a>
+            <a class="navigation__link" href="#">Рассчитать кредит</a>
           </li>
           <li class="navigation__item">
-            <a href="#">Контакты</a>
+            <a class="navigation__link" href="#">Контакты</a>
           </li>
           <li class="navigation__item">
-            <a href="#">Задать вопрос</a>
+            <a class="navigation__link" href="#">Задать вопрос</a>
           </li>
         </ul>
       </div>
       <div class="page-footer__mobile">
         <span class="page-footer__mobile-main">*0904</span>
-        <span class="page-footer__mobile-info">
+        <p class="page-footer__mobile-info">
           Бесплатно для абонентов <br> 
           МТС, Билайн, Мегафон, Теле2
-        </span>
+        </p>
       </div>
       <div class="page-footer__telephone">
         <a class="page-footer__telephone-main" href="tel:88001112233">8 800 111 22 33</a>
-        <span class="page-footer__telephone-info">
+        <p class="page-footer__telephone-info">
           Бесплатный для всех <br>
           городов России
-        </span>
+        </p>
       </div>
       <div class="page-footer__social social">
         <h3 class="visually-hidden">Соцсети</h3>
@@ -221,7 +265,6 @@
           </ul>
       </div>
     </footer>
-  </div>
   <svg style="display:none;"><!--спрайт!-->
     <symbol id="logo" viewBox="0 0 150 27">
       <path d="M51.1 26H48.08V14.24H44.58C44.5 14.8533 44.4133 15.52 44.32 16.24C44.24 16.96 44.1467 17.6933 44.04 
@@ -290,11 +333,14 @@
       12.6132C1.16 12.3971 0.5664 11.7683 0.3656 10.9704C2.38419e-08 9.5225 0 6.5 0 6.5C0 6.5 2.38419e-08 3.4775 0.3656 2.02963C0.5688 1.22931 1.1632 0.599625 1.916 0.38675C3.2856 
       -1.45286e-07 8 0 8 0C8 0 12.7168 -1.45286e-07 14.084 0.38675C14.84 0.602875 15.4336 1.23175 15.6344 2.02963ZM6.4 9.34375L11.2 6.5L6.4 3.65625V9.34375Z" fill="#1F1E25"/>
      </symbol>
-     <symbol id="login">
+     <symbol id="login" viewBox="0 0 20 22">
       <path d="M2.22222 14.3H4.44444V19.8H17.7778V2.2H4.44444V7.7H2.22222V1.1C2.22222 0.808262 2.33929 0.528472 2.54766 0.322183C2.75603 0.115892 3.03865 0 3.33333 0H18.8889C19.1836 
       0 19.4662 0.115892 19.6746 0.322183C19.8829 0.528472 20 0.808262 20 1.1V20.9C20 21.1917 19.8829 21.4715 19.6746 21.6778C19.4662 21.8841 19.1836 22 18.8889 22H3.33333C3.03865 22 
       2.75603 21.8841 2.54766 21.6778C2.33929 21.4715 2.22222 21.1917 2.22222 20.9V14.3ZM8.88889 9.9V6.6L14.4444 11L8.88889 15.4V12.1H0V9.9H8.88889Z" fill="#1F1E25"/>
      </symbol>  
+     <symbol id="open-btn" viewBox="0 0 16 8">
+      <path d="M1 1L9 9L17 1" stroke="#1F1E25" stroke-width="2"/>
+     </symbol>
   </svg>
   <script src="bundle.js"></script>
 </body>

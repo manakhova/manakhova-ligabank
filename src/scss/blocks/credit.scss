@@ -1,0 +1,41 @@
+.credit {
+    background-color: $basic-blue;
+    background-image: url("/public/img/blue-background.png");
+    color: $basic-grey;
+    height: 400px;
+}
+
+.credit__info {
+    width: 1170px;
+    margin: 0 auto;
+    padding: 77px;
+}
+
+.credit__title {
+    position: relative;
+    margin-left: 170px;
+    margin-bottom: 30px;
+    font-size: 54px;
+    font-weight: 700;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: -62px;
+        right: 141px;
+        width: 430px;
+        height: 262px;
+        background-image: url("/public/img/bank-cards.png");
+        background-repeat: no-repeat;
+    }
+}
+
+.credit__slogan {
+    margin-left: 170px;
+    font-size: 22px;
+}
+
+.credit__button {
+    margin-left: 170px;
+    font-size: 18px;
+}
