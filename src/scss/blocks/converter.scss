@@ -1,152 +1,152 @@
 .converter {
-    width: 1170px;
-    margin: 0 auto;
-    padding: 30px;
+  width: 1170px;
+  margin: 0 auto;
+  padding: 30px;
 }
 
 .converter__title {
-    font-weight: 700;
-    font-size: 41px;
+  font-weight: 700;
+  font-size: 41px;
 }
 
 .converter__calc-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 50px;
 }
 
 .converter__wrapper {
-    display: flex;
+  display: flex;
 }
 .converter__calc-form-item {
-    position: relative;
-    width: 45%;
-    margin-bottom: 85px;
+  position: relative;
+  width: 45%;
+  margin-bottom: 85px;
 }
 
 .converter__calc-form-item:last-child {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .converter__have {
-    position: relative;
+  position: relative;
    
-    &::after {
-        content: "";
-        position: absolute;
-        top: 95px;
-        right: -88px;
-        width: 53px;
-        height: 19px;
-        background-image: url("/public/img/arrow.svg");
-        background-repeat: no-repeat;
-    }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 95px;
+    right: -88px;
+    width: 53px;
+    height: 19px;
+    background-image: url("/public/img/arrow.svg");
+    background-repeat: no-repeat;
+  }
 }
 
 .converter__want {
-    position: relative;
+  position: relative;
    
-    &::after {
-        content: "";
-        position: absolute;
-        top: 77px;
-        left: -84px;
-        width: 53px;
-        height: 19px;
-        transform: rotate(180deg);
-        background-image: url("/public/img/arrow.svg");
-        background-repeat: no-repeat;
-    }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 77px;
+    left: -84px;
+    width: 53px;
+    height: 19px;
+    transform: rotate(180deg);
+    background-image: url("/public/img/arrow.svg");
+    background-repeat: no-repeat;
+  }
 }
 
 .converter__have-title,
 .converter__want-title {
-    font-weight: 500;
-    font-size: 22px;
-    margin-bottom: 24px;
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 24px;
 }
 
 .converter__input {
-    border: 1px solid $basic-black;
-    border-radius: 4px;
-    width: 390px;
-    height: 60px;
-    text-align: center;
-    box-sizing: border-box;
-    font-weight: 500;
-    font-size: 24px;
+  border: 1px solid $basic-black;
+  border-radius: 4px;
+  width: 390px;
+  height: 60px;
+  text-align: center;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .converter__type {
-    position: relative;
-    border: 1px solid $basic-black;
-    border-radius: 4px;
-    margin-left: 15px;
-    padding: 18px 15px;
-    padding-right: 45px;
-    font-size: 30px;
+  position: relative;
+  border: 1px solid $basic-black;
+  border-radius: 4px;
+  margin-left: 15px;
+  padding: 18px 15px;
+  padding-right: 45px;
+  font-size: 30px;
 
-    &::after {
-        content: "";
-        position: absolute;
-        top: 23px;
-        right: 17px;
-        width: 16px;
-        height: 12px;
-        background-image: url("/public/img/open.svg");
-        background-repeat: no-repeat;
-    }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 23px;
+    right: 17px;
+    width: 16px;
+    height: 12px;
+    background-image: url("/public/img/open.svg");
+    background-repeat: no-repeat;
+  }
 }
 
 .converter__options {
-    background-color: white;
-    position: absolute;
-    bottom: -177px;
-    right: 3px;
-    list-style: none;
-    padding: 0;
-    border: 1px solid #1F1E25;
-    border-radius: 4px;
-    z-index: 1;
+  background-color: white;
+  position: absolute;
+  bottom: -177px;
+  right: 3px;
+  list-style: none;
+  padding: 0;
+  border: 1px solid #1F1E25;
+  border-radius: 4px;
+  z-index: 1;
 }
 
 .converter__options li {
-    cursor: pointer;
-    font-size: 30px;
-    padding: 5px 29px;
+  cursor: pointer;
+  font-size: 30px;
+  padding: 5px 29px;
 
-    &:hover {
-        background-color: $basic-grey;
-    }
+  &:hover {
+    background-color: $basic-grey;
+  }
 }
 
 .converter__calendar {
-    position: relative;
-    width: 390px;
+  position: relative;
+  width: 390px;
 
-    &::after {
-        content: "";
-        position: absolute;
-        top: 6px;
-        right: 17px;
-        width: 43px;
-        height: 44px;
-        background-image: url("/public/img/calendar.svg");
-        background-repeat: no-repeat;
-    }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: 17px;
+    width: 43px;
+    height: 44px;
+    background-image: url("/public/img/calendar.svg");
+    background-repeat: no-repeat;
+  }
 }
 
 .converter__calendar-date {
-    border: 1px solid $basic-black;
-    border-radius: 4px;
-    width: 100%;
-    height: 60px;
-    font-size: 24px;
-    text-align: center;
-    box-sizing: border-box;
-    padding-right: 53px;
-    padding-top: 6px;
+  border: 1px solid $basic-black;
+  border-radius: 4px;
+  width: 100%;
+  height: 60px;
+  font-size: 24px;
+  text-align: center;
+  box-sizing: border-box;
+  padding-right: 53px;
+  padding-top: 6px;
 }
