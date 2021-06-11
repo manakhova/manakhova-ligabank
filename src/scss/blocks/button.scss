@@ -1,4 +1,5 @@
 .button {
+  cursor: pointer;
   width: 198px;
   padding: 17px 27px;
   border: none;
@@ -21,7 +22,6 @@
 
   &--converter {
     font-size: 18px;
-    cursor: pointer;
     width: 384px;
     height: 60px;
     padding: 22px 37px;;

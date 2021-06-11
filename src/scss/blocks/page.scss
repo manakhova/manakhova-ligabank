@@ -10,31 +10,21 @@
   margin: 0;
   display: grid;
   grid-template-rows: min-content 1fr min-content;
-  background-color: $basic-grey;
+  background-color: white;
   color: $basic-black;
   overflow-x: hidden;
 }
 
 .page__main {
   margin-top: -26px;
-  background-color: white;
 }
 
 .page__header {
-  width: 1170px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 27px;
-  min-height: 91px;
+  background-color: $basic-grey;
 }
 
 .page__footer {
-  width: 1170px;
-  margin: 48px auto 60px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 60px;
+  background-color: $basic-grey;
 }
   
   
