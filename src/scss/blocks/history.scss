@@ -1,13 +1,17 @@
 .history {
   width: 1170px;
+  height: 477px;
   margin: 0 auto;
   margin-bottom: 109px;
   background-color: $basic-grey;
 }
 
 .history__container {
-  padding: 10px 70px;
-  padding-bottom: 40px;
+  height: 413px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 70px;
 }
 
 .history__title {
@@ -29,15 +33,14 @@
 }
 
 .history__list {
+  display: grid;
   list-style: none;
   font-size: 18px;
-  column-count: 2;
-  margin-top: 60px;
-  margin-bottom: 27px;
   padding: 0;
 }
 
 .history__item {
+  grid-column-start: 1;
   margin-bottom: 23px;
 }
 
@@ -46,8 +49,26 @@
 .history__item:nth-of-type(8),
 .history__item:nth-of-type(9),
 .history__item:nth-of-type(10) {
+    grid-row-start: 1;
+    grid-column-start: 2;
     margin-left: 115px;
   }
+
+.history__item:nth-of-type(7) {
+  grid-row-start: 2;
+}
+
+.history__item:nth-of-type(8) {
+  grid-row-start: 3;
+}
+
+.history__item:nth-of-type(9) {
+  grid-row-start: 4;
+}
+
+.history__item:nth-of-type(10) {
+  grid-row-start: 5;
+}
 
 .history__date {
   margin-right: 36px;
@@ -61,7 +82,7 @@
       content: "";
       position: absolute;
       top: 3px;
-      left: 91px;
+      right: -66px;
       width: 53px;
       height: 19px;
       background-image: url("/public/img/arrow-mini.svg");

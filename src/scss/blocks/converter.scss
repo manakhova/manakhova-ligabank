@@ -2,6 +2,7 @@
   width: 1170px;
   margin: 0 auto;
   padding: 30px;
+  padding-bottom: 16px;
 }
 
 .converter__title {
@@ -81,6 +82,7 @@
 }
 
 .converter__type {
+  cursor: pointer;
   position: relative;
   border: 1px solid $basic-black;
   border-radius: 4px;
@@ -111,6 +113,11 @@
   border: 1px solid #1F1E25;
   border-radius: 4px;
   z-index: 1;
+}
+
+.converter__have-options,
+.converter__want-options {
+  display: none;
 }
 
 .converter__options li {

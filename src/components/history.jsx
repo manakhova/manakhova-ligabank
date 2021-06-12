@@ -1,86 +1,57 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {MAX_HISTORY_CONVERTATIONS} from '../const';
 
-const History = () => {
+const History = (props) => {
+  const {historyConvertations, onHistoryButtonCleanClick} = props;
+
+  const maxList = (list) => {
+    if (list.length > MAX_HISTORY_CONVERTATIONS) {
+      return list.slice(list.length - MAX_HISTORY_CONVERTATIONS, list.length);
+    }
+
+    return list;
+  };
+
+  const renderHistoryList = (list) => {
+    if (list.length > 5) {
+      return <ul className="history__list" style={{gridTemplateColumns: `50% 50%`}}>
+        {maxList(list).map((item, i) => <li className="history__item" key={i}>
+          <span className="history__date">{item.date}</span>
+          <span className="history__convertation">
+            <span id="from">{item.converterFromQuantity}{item.converterFrom}</span>
+            <span id="to">{item.converterToQuantity}{item.converterTo}</span>
+          </span>
+        </li>)}
+      </ul>;
+    } else {
+      return <ul className="history__list">
+        {maxList(list).map((item, i) => <li className="history__item" key={i}>
+          <span className="history__date">{item.date}</span>
+          <span className="history__convertation">
+            <span id="from">{item.converterFromQuantity}{item.converterFrom}</span>
+            <span id="to">{item.converterToQuantity}{item.converterTo}</span>
+          </span>
+        </li>)}
+      </ul>;
+    }
+  };
+
   return (
     <section className="history">
       <div className="history__container">
         <h3 className="history__title">История конвертаций</h3>
-        <ul className="history__list">
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1003 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1030 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1003 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1030 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1003 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1030 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1030 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1030 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1000 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-          <li className="history__item">
-            <span className="history__date">01.06.2021</span>
-            <span className="history__convertation">
-              <span id="from">1000 RUB</span>
-              <span id="to">13,1234 USD</span>
-            </span>
-          </li>
-        </ul>
+        {renderHistoryList(historyConvertations)}
         <button className="history__button button">Очистить историю</button>
       </div>
     </section>
   );
 };
 
+History.propTypes = {
+  historyConvertations: PropTypes.array.isRequired,
+  onHistoryButtonCleanClick: PropTypes.func.isRequired
+};
+
 export default History;
+

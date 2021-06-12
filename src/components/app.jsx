@@ -4,6 +4,8 @@ import Header from './header';
 import Main from './main';
 import Footer from './footer';
 
+import '../../node_modules/flatpickr/dist/flatpickr.min.css';
+
 const App = () => {
   return (
     <>
