@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../store/action';
 import Converter from './converter.jsx';
+import {calculateRates} from '../const.js';
 import History from './history.jsx';
+import {fetchData} from "../store/api-actions";
+import dayjs from 'dayjs';
 
 const Main = (props) => {
   const {converterFrom,
@@ -15,12 +18,19 @@ const Main = (props) => {
     setConverterTypeTo,
     setConverterQuantityTo,
     date,
+    rates,
     historyConvertations,
-    setNewConvertationToHistory} = props;
+    setNewConvertationToHistory,
+    onLoadData} = props;
+
+  const inputFrom = document.querySelector(`#money-have`);
+  const inputTo = document.querySelector(`#money-want`);
 
   const handleMoneyTypeFromClick = (money, closeSelect) => (evt) => {
     evt.preventDefault();
     setConverterTypeFrom(money);
+    setConverterQuantityFrom(``);
+    setConverterQuantityTo(``);
 
     closeSelect();
   };
@@ -28,6 +38,8 @@ const Main = (props) => {
   const handleMoneyTypeToClick = (money, closeSelect) => (evt) => {
     evt.preventDefault();
     setConverterTypeTo(money);
+    setConverterQuantityFrom(``);
+    setConverterQuantityTo(``);
 
     closeSelect();
   };
@@ -40,21 +52,31 @@ const Main = (props) => {
       converterFromQuantity: moneyFromQuantity,
       converterTo: moneyTo,
       converterToQuantity: moneyToQuantity,
-      date: convertationDate
+      date: dayjs(convertationDate).format(`DD.MM.YYYY`)
     };
 
     setNewConvertationToHistory(newConvertation);
   };
 
   const handleMoneyHaveChange = (quantity) => (evt) => {
-    quantity = Number(evt.target.value);
+    quantity = evt.target.value;
     setConverterQuantityFrom(quantity);
+
+    inputTo.value = Number(calculateRates(converterFrom, converterTo, inputFrom.value, rates)).toFixed(2);
+    setConverterQuantityTo(inputTo.value);
   };
 
   const handleMoneyWantChange = (quantity) => (evt) => {
-    quantity = Number(evt.target.value);
+    quantity = evt.target.value;
     setConverterQuantityTo(quantity);
+
+    inputFrom.value = Number(calculateRates(converterTo, converterFrom, inputTo.value, rates)).toFixed(2);
+    setConverterQuantityFrom(inputFrom.value);
   };
+
+  useEffect(() => {
+    onLoadData();
+  });
 
   return (
     <main className="page__main">
@@ -74,8 +96,8 @@ const Main = (props) => {
         onMoneyTypeFromClick={handleMoneyTypeFromClick}
         onMoneyTypeToClick={handleMoneyTypeToClick}
         onSaveConvertationClick={handleConvertationSaveClick}
-        onMoneyHaveChange={handleMoneyHaveChange}
-        onMoneyWantChange={handleMoneyWantChange}
+        onMoneyHaveInput={handleMoneyHaveChange}
+        onMoneyWantInput={handleMoneyWantChange}
       />
       <History
         historyConvertations={historyConvertations}/>
@@ -86,15 +108,17 @@ const Main = (props) => {
 Main.propTypes = {
   converterFrom: PropTypes.string.isRequired,
   converterTo: PropTypes.string.isRequired,
-  converterFromQuantity: PropTypes.number.isRequired,
-  converterToQuantity: PropTypes.number.isRequired,
+  converterFromQuantity: PropTypes.string.isRequired,
+  converterToQuantity: PropTypes.string.isRequired,
   setConverterTypeFrom: PropTypes.func.isRequired,
   setConverterQuantityFrom: PropTypes.func.isRequired,
   setConverterTypeTo: PropTypes.func.isRequired,
   setConverterQuantityTo: PropTypes.func.isRequired,
   date: PropTypes.string.isRequired,
+  rates: PropTypes.object.isRequired,
   historyConvertations: PropTypes.array.isRequired,
   setNewConvertationToHistory: PropTypes.func.isRequired,
+  onLoadData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -104,6 +128,7 @@ const mapStateToProps = (state) => {
     converterFromQuantity: state.converterFromQuantity,
     converterToQuantity: state.converterToQuantity,
     date: state.date,
+    rates: state.rates,
     historyConvertations: state.historyConvertations
   };
 };
@@ -123,6 +148,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setNewConvertationToHistory(historyConvertations) {
     dispatch(ActionCreator.setNewConvertationToHistory(historyConvertations));
+  },
+  onLoadData() {
+    dispatch(fetchData());
   },
 });
 

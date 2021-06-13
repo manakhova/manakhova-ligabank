@@ -1,13 +1,13 @@
 import {ActionType} from './action';
-import dayjs from 'dayjs';
 
 const initialState = {
   converterFrom: `RUS`,
-  converterFromQuantity: 1000,
+  converterFromQuantity: ``,
   converterTo: `USD`,
-  converterToQuantity: 10,
-  date: dayjs(new Date()).format(`DD.MM.YYYY`),
-  historyConvertations: []
+  converterToQuantity: ``,
+  date: String(new Date()),
+  historyConvertations: [],
+  rates: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +36,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         historyConvertations: [...state.historyConvertations, action.payload]
+      };
+    case ActionType.LOAD_DATA:
+      return {
+        ...state,
+        rates: action.payload,
       };
   }
 

@@ -5,6 +5,7 @@ export const ActionType = {
   DELETE_ALL_CONVERTATIONS: `deleteAllConvertations`,
   CHANGE_CONVERTER_QUANTITY_FROM: `setConverterQuantityFrom`,
   CHANGE_CONVERTER_QUANTITY_TO: `setConverterQuantityTo`,
+  LOAD_DATA: `loadInfo`
 };
 
 
@@ -29,4 +30,8 @@ export const ActionCreator = {
     type: ActionType.ADD_NEW_CONVERTATION,
     payload: convertation
   }),
+  loadData: (data) => ({
+    type: ActionType.LOAD_DATA,
+    payload: data,
+  })
 };

@@ -5,10 +5,23 @@
   padding-bottom: 16px;
 }
 
+.converter__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .converter__title {
   font-weight: 700;
   font-size: 41px;
+  margin: 0;
+  margin-top: 33px;
 }
+
+.converter__link {
+  text-decoration: none;
+  color: $basic-black;
+}
+
 
 .converter__calc-form {
   display: flex;
@@ -107,7 +120,7 @@
   background-color: white;
   position: absolute;
   bottom: -177px;
-  right: 3px;
+  right: 0;
   list-style: none;
   padding: 0;
   border: 1px solid #1F1E25;

@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import flatpickr from 'flatpickr';
 import {MoneyType} from '../const';
+import dayjs from 'dayjs';
 
 const Converter = (props) => {
   const {onMoneyTypeFromClick,
-    onMoneyHaveChange,
-    onMoneyWantChange,
+    onMoneyHaveInput,
+    onMoneyWantInput,
     onMoneyTypeToClick,
     converterFrom,
     converterTo,
@@ -33,14 +34,17 @@ const Converter = (props) => {
 
   return (
     <section className="converter">
-      <h2 className="converter__title">Конвертер валют</h2>
+      <div className="converter__wrapper">
+        <h2 className="converter__title">Конвертер валют</h2>
+        <a className="converter__link" href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
+      </div>
       <div className="converter__container">
         <form className="converter__calc-form" method="post" action="#">
           <div className="converter__calc-form-item converter__have">
             <h3 className="converter__have-title">У меня есть</h3>
             <div className="converter__wrapper">
               <label>
-                <input className="converter__input converter__have-input" type="number" name="money-have" min="0" value={converterFromQuantity} id="money-have" onChange={onMoneyHaveChange(converterFromQuantity)}/>
+                <input className="converter__input converter__have-input" type="text" name="money-have" value={`${converterFromQuantity}`} id="money-have" onInput={onMoneyHaveInput(converterFromQuantity)} required/>
               </label>
               <div className="converter__type converter__have-type" onClick={handleSelectFromClick}>
                 {converterFrom}
@@ -58,7 +62,7 @@ const Converter = (props) => {
             <h3 className="converter__want-title">Хочу приобрести</h3>
             <div className="converter__wrapper">
               <label>
-                <input className="converter__input converter__want-input" type="number" name="money-want" min="0" id="money-want" value={converterToQuantity} onChange={onMoneyWantChange(converterToQuantity)}/>
+                <input className="converter__input converter__want-input" type="text" name="money-want" min="0" id="money-want" value={`${converterToQuantity}`} onInput={onMoneyWantInput(converterToQuantity)} required/>
               </label>
               <div className="converter__type converter__want-type" onClick={handleSelectToClick}>
                 {converterTo}
@@ -75,7 +79,7 @@ const Converter = (props) => {
           <div className="converter__calc-form-item converter__container">
             <div className="converter__calendar">
               <label>
-                <input className="converter__calendar-date" type="text" id="date" name="date" defaultValue={date}/>
+                <input className="converter__calendar-date" type="text" id="date" name="date" defaultValue={dayjs(date).format(`DD.MM.YYYY`)}/>
               </label>
             </div>
             <button className="converter__calendar-button button button--converter" type="button" onClick={onSaveConvertationClick(converterFrom, converterFromQuantity, converterTo, converterToQuantity, date)}>Сохранить результат</button>
@@ -89,14 +93,14 @@ const Converter = (props) => {
 Converter.propTypes = {
   converterFrom: PropTypes.string.isRequired,
   converterTo: PropTypes.string.isRequired,
-  converterFromQuantity: PropTypes.number.isRequired,
-  converterToQuantity: PropTypes.number.isRequired,
+  converterFromQuantity: PropTypes.string.isRequired,
+  converterToQuantity: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   onMoneyTypeFromClick: PropTypes.func.isRequired,
   onMoneyTypeToClick: PropTypes.func.isRequired,
   onSaveConvertationClick: PropTypes.func.isRequired,
-  onMoneyHaveChange: PropTypes.func.isRequired,
-  onMoneyWantChange: PropTypes.func.isRequired
+  onMoneyHaveInput: PropTypes.func.isRequired,
+  onMoneyWantInput: PropTypes.func.isRequired
 };
 
 export default Converter;
