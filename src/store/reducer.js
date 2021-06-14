@@ -7,7 +7,8 @@ const initialState = {
   converterToQuantity: ``,
   date: String(new Date()),
   historyConvertations: [],
-  rates: {}
+  rates: {},
+  isDataLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,10 +38,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         historyConvertations: [...state.historyConvertations, action.payload]
       };
+    case ActionType.DELETE_CONVERTATIONS:
+      return {
+        ...state,
+        historyConvertations: action.payload
+      };
     case ActionType.LOAD_DATA:
       return {
         ...state,
         rates: action.payload,
+        isDataLoaded: true
       };
   }
 

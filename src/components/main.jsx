@@ -21,7 +21,9 @@ const Main = (props) => {
     rates,
     historyConvertations,
     setNewConvertationToHistory,
-    onLoadData} = props;
+    onLoadData,
+    isDataLoaded,
+    deleteHistory} = props;
 
   const inputFrom = document.querySelector(`#money-have`);
   const inputTo = document.querySelector(`#money-want`);
@@ -59,6 +61,7 @@ const Main = (props) => {
   };
 
   const handleMoneyHaveChange = (quantity) => (evt) => {
+    evt.preventDefault();
     quantity = evt.target.value;
     setConverterQuantityFrom(quantity);
 
@@ -67,6 +70,7 @@ const Main = (props) => {
   };
 
   const handleMoneyWantChange = (quantity) => (evt) => {
+    evt.preventDefault();
     quantity = evt.target.value;
     setConverterQuantityTo(quantity);
 
@@ -74,9 +78,17 @@ const Main = (props) => {
     setConverterQuantityFrom(inputFrom.value);
   };
 
+  const handleDeleteHistoryCkick = (list) => (evt) => {
+    evt.preventDefault();
+
+    deleteHistory(list);
+  };
+
   useEffect(() => {
-    onLoadData();
-  });
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
 
   return (
     <main className="page__main">
@@ -100,7 +112,8 @@ const Main = (props) => {
         onMoneyWantInput={handleMoneyWantChange}
       />
       <History
-        historyConvertations={historyConvertations}/>
+        historyConvertations={historyConvertations}
+        onDeleteHistoryClick={handleDeleteHistoryCkick}/>
     </main>
   );
 };
@@ -119,6 +132,8 @@ Main.propTypes = {
   historyConvertations: PropTypes.array.isRequired,
   setNewConvertationToHistory: PropTypes.func.isRequired,
   onLoadData: PropTypes.func.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
+  deleteHistory: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -129,7 +144,8 @@ const mapStateToProps = (state) => {
     converterToQuantity: state.converterToQuantity,
     date: state.date,
     rates: state.rates,
-    historyConvertations: state.historyConvertations
+    historyConvertations: state.historyConvertations,
+    isDataLoaded: state.isDataLoaded
   };
 };
 
@@ -152,6 +168,9 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
     dispatch(fetchData());
   },
+  deleteHistory(historyConvertations) {
+    dispatch(ActionCreator.deleteHistory(historyConvertations));
+  }
 });
 
 export {Main};

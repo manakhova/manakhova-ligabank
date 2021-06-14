@@ -41,11 +41,9 @@ const Converter = (props) => {
       <div className="converter__container">
         <form className="converter__calc-form" method="post" action="#">
           <div className="converter__calc-form-item converter__have">
-            <h3 className="converter__have-title">У меня есть</h3>
+            <label className="converter__have-title" htmlFor="money-have">У меня есть</label>
             <div className="converter__wrapper">
-              <label>
-                <input className="converter__input converter__have-input" type="text" name="money-have" value={`${converterFromQuantity}`} id="money-have" onInput={onMoneyHaveInput(converterFromQuantity)} required/>
-              </label>
+              <input className="converter__input converter__have-input" type="text" name="money-have" value={`${converterFromQuantity}`} id="money-have" onInput={onMoneyHaveInput(converterFromQuantity)} required/>
               <div className="converter__type converter__have-type" onClick={handleSelectFromClick}>
                 {converterFrom}
               </div>
@@ -59,11 +57,9 @@ const Converter = (props) => {
             </ul>
           </div>
           <div className="converter__calc-form-item converter__want">
-            <h3 className="converter__want-title">Хочу приобрести</h3>
+            <label className="converter__want-title" htmlFor="money-want">Хочу приобрести</label>
             <div className="converter__wrapper">
-              <label>
-                <input className="converter__input converter__want-input" type="text" name="money-want" min="0" id="money-want" value={`${converterToQuantity}`} onInput={onMoneyWantInput(converterToQuantity)} required/>
-              </label>
+              <input className="converter__input converter__want-input" type="text" name="money-want" min="0" id="money-want" value={`${converterToQuantity}`} onInput={onMoneyWantInput(converterToQuantity)} required/>
               <div className="converter__type converter__want-type" onClick={handleSelectToClick}>
                 {converterTo}
               </div>

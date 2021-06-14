@@ -2,9 +2,9 @@ export const ActionType = {
   CHANGE_CONVERTER_TYPE_FROM: `setConverterTypeFrom`,
   CHANGE_CONVERTER_TYPE_TO: `setConverterTypeTo`,
   ADD_NEW_CONVERTATION: `addNewConvertation`,
-  DELETE_ALL_CONVERTATIONS: `deleteAllConvertations`,
   CHANGE_CONVERTER_QUANTITY_FROM: `setConverterQuantityFrom`,
   CHANGE_CONVERTER_QUANTITY_TO: `setConverterQuantityTo`,
+  DELETE_CONVERTATIONS: `deleteConvertations`,
   LOAD_DATA: `loadInfo`
 };
 
@@ -33,5 +33,10 @@ export const ActionCreator = {
   loadData: (data) => ({
     type: ActionType.LOAD_DATA,
     payload: data,
-  })
+  }),
+  deleteHistory: (convertations) => ({
+    type: ActionType.DELETE_CONVERTATIONS,
+    payload: convertations.slice(convertations.length),
+  }),
 };
+

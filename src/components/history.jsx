@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {MAX_HISTORY_CONVERTATIONS} from '../const';
 
 const History = (props) => {
-  const {historyConvertations} = props;
+  const {historyConvertations, onDeleteHistoryClick} = props;
 
   const maxList = (list) => {
     if (list.length > MAX_HISTORY_CONVERTATIONS) {
@@ -42,7 +42,7 @@ const History = (props) => {
       <div className="history__container">
         <h3 className="history__title">История конвертаций</h3>
         {renderHistoryList(historyConvertations)}
-        <button className="history__button button">Очистить историю</button>
+        <button className="history__button button" onClick={onDeleteHistoryClick(historyConvertations)}>Очистить историю</button>
       </div>
     </section>
   );
@@ -50,7 +50,7 @@ const History = (props) => {
 
 History.propTypes = {
   historyConvertations: PropTypes.array.isRequired,
-  // onHistoryButtonCleanClick: PropTypes.func.isRequired
+  onDeleteHistoryClick: PropTypes.func.isRequired
 };
 
 export default History;
