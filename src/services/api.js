@@ -1,4 +1,4 @@
-import axios from 'axios-https-proxy-fix';
+import axios from 'axios';
 
 const BACKEND_URL = `https://www.cbr-xml-daily.ru/daily_json.js`;
 const REQUEST_TIMEOUT = 5000;
