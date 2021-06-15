@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "axios-https-proxy-fix": "^0.17.1",
     "dayjs": "^1.10.5",
     "flatpickr": "^4.6.9",
     "prop-types": "^15.7.2",

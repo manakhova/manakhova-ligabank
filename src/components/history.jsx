@@ -49,7 +49,13 @@ const History = (props) => {
 };
 
 History.propTypes = {
-  historyConvertations: PropTypes.array.isRequired,
+  historyConvertations: PropTypes.arrayOf(PropTypes.shape({
+    converterFrom: PropTypes.string.isRequired,
+    converterFromQuantity: PropTypes.string.isRequired,
+    converterTo: PropTypes.string.isRequired,
+    converterToQuantity: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
   onDeleteHistoryClick: PropTypes.func.isRequired
 };
 

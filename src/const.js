@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const MoneyType = {
   RUS: `RUS`,
   USD: `USD`,
@@ -7,6 +9,10 @@ export const MoneyType = {
 };
 
 export const MAX_HISTORY_CONVERTATIONS = 10;
+
+export const CURRENT_DATE = (new Date()).toISOString();
+
+export const WEEK_AGO = 7 * 24 * 3600 * 1000;
 
 export const calculateRates = (fromType, toType, quantity, rates) => {
   if (fromType === `RUS` && toType === `USD`) {

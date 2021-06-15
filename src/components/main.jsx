@@ -18,12 +18,14 @@ const Main = (props) => {
     setConverterTypeTo,
     setConverterQuantityTo,
     date,
+    currentDate,
     rates,
     historyConvertations,
     setNewConvertationToHistory,
     onLoadData,
     isDataLoaded,
-    deleteHistory} = props;
+    deleteHistory,
+    setNewDate} = props;
 
   const inputFrom = document.querySelector(`#money-have`);
   const inputTo = document.querySelector(`#money-want`);
@@ -84,6 +86,11 @@ const Main = (props) => {
     deleteHistory(list);
   };
 
+  const handleDateChange = (newDate) => (evt) => {
+    newDate = evt.target.value;
+    setNewDate(newDate);
+  };
+
   useEffect(() => {
     if (!isDataLoaded) {
       onLoadData();
@@ -105,11 +112,13 @@ const Main = (props) => {
         converterFromQuantity={converterFromQuantity}
         converterToQuantity={converterToQuantity}
         date={date}
+        currentDate={currentDate}
         onMoneyTypeFromClick={handleMoneyTypeFromClick}
         onMoneyTypeToClick={handleMoneyTypeToClick}
         onSaveConvertationClick={handleConvertationSaveClick}
         onMoneyHaveInput={handleMoneyHaveChange}
         onMoneyWantInput={handleMoneyWantChange}
+        onDateInputChange={handleDateChange}
       />
       <History
         historyConvertations={historyConvertations}
@@ -128,12 +137,25 @@ Main.propTypes = {
   setConverterTypeTo: PropTypes.func.isRequired,
   setConverterQuantityTo: PropTypes.func.isRequired,
   date: PropTypes.string.isRequired,
-  rates: PropTypes.object.isRequired,
-  historyConvertations: PropTypes.array.isRequired,
+  currentDate: PropTypes.string.isRequired,
+  rates: PropTypes.shape({
+    USD: PropTypes.number,
+    EUR: PropTypes.number,
+    GBP: PropTypes.number,
+    CNY: PropTypes.number,
+  }).isRequired,
+  historyConvertations: PropTypes.arrayOf(PropTypes.shape({
+    converterFrom: PropTypes.string.isRequired,
+    converterFromQuantity: PropTypes.string.isRequired,
+    converterTo: PropTypes.string.isRequired,
+    converterToQuantity: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
   setNewConvertationToHistory: PropTypes.func.isRequired,
   onLoadData: PropTypes.func.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
-  deleteHistory: PropTypes.func.isRequired
+  deleteHistory: PropTypes.func.isRequired,
+  setNewDate: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -143,6 +165,7 @@ const mapStateToProps = (state) => {
     converterFromQuantity: state.converterFromQuantity,
     converterToQuantity: state.converterToQuantity,
     date: state.date,
+    currentDate: state.currentDate,
     rates: state.rates,
     historyConvertations: state.historyConvertations,
     isDataLoaded: state.isDataLoaded
@@ -170,7 +193,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   deleteHistory(historyConvertations) {
     dispatch(ActionCreator.deleteHistory(historyConvertations));
-  }
+  },
+  setNewDate(date) {
+    dispatch(ActionCreator.setNewDate(date));
+  },
 });
 
 export {Main};

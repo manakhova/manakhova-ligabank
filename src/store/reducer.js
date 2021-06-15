@@ -1,11 +1,13 @@
 import {ActionType} from './action';
+import {CURRENT_DATE} from '../const';
 
 const initialState = {
   converterFrom: `RUS`,
   converterFromQuantity: ``,
   converterTo: `USD`,
   converterToQuantity: ``,
-  date: String(new Date()),
+  date: CURRENT_DATE,
+  currentDate: CURRENT_DATE,
   historyConvertations: [],
   rates: {},
   isDataLoaded: false
@@ -48,6 +50,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         rates: action.payload,
         isDataLoaded: true
+      };
+    case ActionType.GHANGE_DATE:
+      return {
+        ...state,
+        date: action.payload
       };
   }
 

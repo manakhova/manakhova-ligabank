@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios-https-proxy-fix';
 
 const BACKEND_URL = `https://www.cbr-xml-daily.ru/daily_json.js`;
 const REQUEST_TIMEOUT = 5000;
@@ -6,7 +6,7 @@ const REQUEST_TIMEOUT = 5000;
 export const createAPI = () => {
   const api = axios.create({
     baseURL: BACKEND_URL,
-    timeout: REQUEST_TIMEOUT
+    timeout: REQUEST_TIMEOUT,
   });
 
   const onSuccess = (response) => response;

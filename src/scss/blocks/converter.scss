@@ -51,7 +51,7 @@
   &::after {
     content: "";
     position: absolute;
-    top: 95px;
+    top: 75px;
     right: -88px;
     width: 53px;
     height: 19px;
@@ -66,7 +66,7 @@
   &::after {
     content: "";
     position: absolute;
-    top: 77px;
+    top: 57px;
     left: -84px;
     width: 53px;
     height: 19px;
@@ -161,13 +161,33 @@
 }
 
 .converter__calendar-date {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: "Roboto", "Arial", sans-serif;
+  color: $basic-black;
   border: 1px solid $basic-black;
   border-radius: 4px;
-  width: 100%;
-  height: 60px;
   font-size: 24px;
   text-align: center;
-  box-sizing: border-box;
-  padding-right: 53px;
-  padding-top: 6px;
+  padding-right: 56px;
+  padding-left: 18px;
+  padding-top: 11px;
+
+  &::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+  }
 }
+

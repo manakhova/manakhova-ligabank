@@ -5,7 +5,8 @@ export const ActionType = {
   CHANGE_CONVERTER_QUANTITY_FROM: `setConverterQuantityFrom`,
   CHANGE_CONVERTER_QUANTITY_TO: `setConverterQuantityTo`,
   DELETE_CONVERTATIONS: `deleteConvertations`,
-  LOAD_DATA: `loadInfo`
+  LOAD_DATA: `loadInfo`,
+  GHANGE_DATE: `changeDate`
 };
 
 
@@ -37,6 +38,10 @@ export const ActionCreator = {
   deleteHistory: (convertations) => ({
     type: ActionType.DELETE_CONVERTATIONS,
     payload: convertations.slice(convertations.length),
+  }),
+  setNewDate: (date) => ({
+    type: ActionType.GHANGE_DATE,
+    payload: date,
   }),
 };
 

@@ -11,5 +11,5 @@ const getRates = (data) => {
 
 export const fetchData = () => (dispatch, _getState, api) => (
   api.get()
-    .then(({data}) => dispatch(ActionCreator.loadData(getRates(data))))
+      .then(({data}) => dispatch(ActionCreator.loadData(getRates(data))))
 );

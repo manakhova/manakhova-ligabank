@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import flatpickr from 'flatpickr';
-import {MoneyType} from '../const';
+import {MoneyType, WEEK_AGO} from '../const';
 import dayjs from 'dayjs';
 
 const Converter = (props) => {
@@ -14,7 +13,15 @@ const Converter = (props) => {
     converterFromQuantity,
     converterToQuantity,
     date,
-    onSaveConvertationClick} = props;
+    currentDate,
+    onSaveConvertationClick,
+    onDateInputChange} = props;
+
+  const formattedDate = dayjs(date).format(`YYYY-MM-DD`);
+  const formattedCurrentdDate = dayjs(currentDate).format(`YYYY-MM-DD`);
+
+  const weekAgoDate = Date.now() - WEEK_AGO;
+  const formattedMinDate = dayjs(new Date(weekAgoDate).toISOString()).format(`YYYY-MM-DD`);
 
   const handleSelectFromClick = () => {
     const optionsFrom = document.querySelector(`.converter__have-options`);
@@ -75,7 +82,8 @@ const Converter = (props) => {
           <div className="converter__calc-form-item converter__container">
             <div className="converter__calendar">
               <label>
-                <input className="converter__calendar-date" type="text" id="date" name="date" defaultValue={dayjs(date).format(`DD.MM.YYYY`)}/>
+                <span className="converter__calendar-toggle"></span>
+                <input className="converter__calendar-date" type="date" id="date" min={formattedMinDate} max={formattedCurrentdDate} name="date" value={formattedDate} onChange={onDateInputChange(date)}/>
               </label>
             </div>
             <button className="converter__calendar-button button button--converter" type="button" onClick={onSaveConvertationClick(converterFrom, converterFromQuantity, converterTo, converterToQuantity, date)}>Сохранить результат</button>
@@ -92,11 +100,13 @@ Converter.propTypes = {
   converterFromQuantity: PropTypes.string.isRequired,
   converterToQuantity: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  currentDate: PropTypes.string.isRequired,
   onMoneyTypeFromClick: PropTypes.func.isRequired,
   onMoneyTypeToClick: PropTypes.func.isRequired,
   onSaveConvertationClick: PropTypes.func.isRequired,
   onMoneyHaveInput: PropTypes.func.isRequired,
-  onMoneyWantInput: PropTypes.func.isRequired
+  onMoneyWantInput: PropTypes.func.isRequired,
+  onDateInputChange: PropTypes.func.isRequired,
 };
 
 export default Converter;
